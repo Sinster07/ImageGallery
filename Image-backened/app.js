@@ -12,12 +12,12 @@ const port = 3001;
 app.use(
   cors({
     origin: "http://localhost:5173",
-    optionsSuccessStatus: 200, 
+    optionsSuccessStatus: 200,
   })
 );
 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 //////////////// Multer configuration for file uploads/////////////
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -49,7 +49,6 @@ app.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
   const imagePath = path.join(__dirname, "uploads", filename);
 
-  // Check if the file exists
   fs.access(imagePath, fs.constants.F_OK, (err) => {
     if (err) {
       console.error("Error accessing file:", err);
@@ -82,8 +81,6 @@ app.delete("/images/:filename", (req, res) => {
         return;
       }
 
-      // File deleted successfully
-      console.log("File deleted:", filename);
       res.status(200).send("File deleted.");
     });
   });

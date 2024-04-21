@@ -7,8 +7,10 @@ const ImageGallery = ({ images, onDelete }) => {
   const handleDelete = async (imageUrl) => {
     console.log(imageUrl);
     try {
-      // Call your delete API endpoint
-      const response = await axios.delete(imageUrl);
+      // Extract the filename from the imageUrl
+      const filename = imageUrl.split('/').pop();
+      // Call your delete API endpoint with the filename
+      const response = await axios.delete(`http://localhost:3001/images/${filename}`);
       if (response.status === 200) {
         // If the delete is successful, call the onDelete function to update the image list
         onDelete(imageUrl);
@@ -19,6 +21,7 @@ const ImageGallery = ({ images, onDelete }) => {
       console.error("Error deleting image:", error);
     }
   };
+  
 
   return (
     <div className="container mx-auto px-4 mt-10">
@@ -39,11 +42,11 @@ const ImageGallery = ({ images, onDelete }) => {
               }`}
             />
               <button
-                className="absolute top-2 right-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                onClick={() => handleDelete(imageUrl)}
-              >
-                Delete
-              </button>
+              className="absolute top-2 right-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-sm text-xs"
+              onClick={() => handleDelete(imageUrl)}
+            >
+              Delete
+            </button>
        
           </div>
         ))}
