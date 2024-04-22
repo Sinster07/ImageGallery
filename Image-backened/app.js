@@ -45,7 +45,7 @@ app.get("/getAllImages", (req, res) => {
     }
 
     const imageUrls = files.map((file) => {
-      return `http://localhost:3001/images/${file}`;
+      return `https://imagegallery-6.onrender.com/images/${file}`;
     });
 
     res.status(200).json(imageUrls);

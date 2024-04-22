@@ -9,7 +9,7 @@ function App() {
   const handleCapture = (imageData) => {
     setCapturedImage(imageData);
 
-    fetch("http://localhost:3001/getAllImages")
+    fetch("https://imagegallery-6.onrender.com/getAllImages")
       .then((response) => response.json())
       .then((data) => setImages(data))
       .catch((error) => console.error("Error fetching images:", error));
@@ -20,7 +20,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/getAllImages")
+    fetch("https://imagegallery-6.onrender.com/getAllImages")
       .then((response) => response.json())
       .then((data) => setImages(data))
       .catch((error) => console.error("Error fetching images:", error));

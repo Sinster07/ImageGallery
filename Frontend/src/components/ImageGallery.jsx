@@ -10,7 +10,7 @@ const ImageGallery = ({ images, onDelete }) => {
       // Extract the filename from the imageUrl
       const filename = imageUrl.split('/').pop();
       // Call your delete API endpoint with the filename
-      const response = await axios.delete(`http://localhost:3001/images/${filename}`);
+      const response = await axios.delete(`https://imagegallery-6.onrender.com/images/${filename}`);
       if (response.status === 200) {
         // If the delete is successful, call the onDelete function to update the image list
         onDelete(imageUrl);

@@ -32,7 +32,7 @@ const CustomWebcam = ({ onCapture }) => {
       const formData = new FormData();
       formData.append("image", imageBlob, "image.jpg");
       const response = await axios.post(
-        "http://localhost:3001/upload",
+        "https://imagegallery-6.onrender.com/upload",
         formData,
         {
           headers: {
