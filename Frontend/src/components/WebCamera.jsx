@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import axios from "axios";
+
 const CustomWebcam = ({ onCapture }) => {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
@@ -8,10 +9,9 @@ const CustomWebcam = ({ onCapture }) => {
   const [aspectRatio, setAspectRatio] = useState("16:9");
   const [facingMode, setFacingMode] = useState("user");
 
- 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setImgSrc(imageSrc); 
+    setImgSrc(imageSrc);
     onCapture(imageSrc);
 
     // Convert base64 string to Blob
@@ -24,7 +24,7 @@ const CustomWebcam = ({ onCapture }) => {
     const blob = new Blob([ab], { type: "image/jpeg" });
 
     saveImage(blob);
-  }, [webcamRef, setImgSrc,onCapture]);
+  }, [webcamRef, setImgSrc, onCapture]);
 
   const saveImage = async (imageBlob) => {
     console.log("Saved screenshot");
@@ -83,20 +83,20 @@ const CustomWebcam = ({ onCapture }) => {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col mt-10">
-      <div className="overflow-hidden w-600 h-600 relative">
+    <div className="flex flex-col justify-center items-center mt-10">
+      <div className="overflow-hidden relative w-full max-w-screen-md">
         <Webcam
           height={600}
           width={600}
           ref={webcamRef}
           videoConstraints={getVideoConstraints()}
-          style={{ transform: `scale(${zoom})` }}
+          style={{ transform: `scale(${zoom})`, marginLeft: "auto", marginRight: "auto" }}
         />
       </div>
 
-      <div className="flex mt-5">
+      <div className="flex flex-col mt-5 w-full max-w-screen-md">
         <select
-          className="bg-gray-200 text-gray-700 py-2 px-4 border border-gray-300 rounded mr-3"
+          className="bg-gray-200 text-gray-700 py-2 px-4 border border-gray-300 rounded mb-3"
           value={aspectRatio}
           onChange={handleAspectRatioChange}
         >
@@ -105,31 +105,33 @@ const CustomWebcam = ({ onCapture }) => {
           <option value="1:1">1:1</option>
         </select>
 
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
-          onClick={capture}
-        >
-          Capture photo
-        </button>
+        <div className="flex justify-around">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
+            onClick={capture}
+          >
+            Capture photo
+          </button>
 
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
-          onClick={handleZoomIn}
-        >
-          Zoom In
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleZoomOut}
-        >
-          Zoom Out
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-5 rounded"
-          onClick={handleFacingModeChange}
-        >
-          Switch Camera
-        </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
+            onClick={handleZoomIn}
+          >
+            Zoom In
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3"
+            onClick={handleZoomOut}
+          >
+            Zoom Out
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={handleFacingModeChange}
+          >
+            Switch Camera
+          </button>
+        </div>
       </div>
     </div>
   );
