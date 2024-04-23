@@ -36,7 +36,7 @@ const storage = multer.diskStorage({
 });
 
 app.get("/getAllImages", (req, res) => {
-  console.log(req);
+  const accepted = ["jpg", "png", "jpeg"];
   fs.readdir(path.join(__dirname, "uploads"), (err, files) => {
     if (err) {
       console.error("Error reading directory:", err);
@@ -44,13 +44,18 @@ app.get("/getAllImages", (req, res) => {
       return;
     }
 
-    const imageUrls = files.map((file) => {
-      return `https://imagegallery-6.onrender.com/images/${file}`;
-    });
+    const imageUrls = files.reduce((acc, file) => {
+      const extend = file.split(".").pop();
+      if (accepted.includes(extend)) {
+        acc.push(`https://imagegallery-6.onrender.com/images/${file}`);
+      }
+      return acc;
+    }, []);
 
     res.status(200).json(imageUrls);
   });
 });
+
 
 app.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
