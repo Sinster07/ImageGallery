@@ -16,3 +16,17 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.gallery {
+  --gap: clamp(1rem, 5vmin, 2rem);
+  columns: 300px;
+  gap: var(--gap);
+  width: 96%;
+  max-width: 960px;
+  margin: 5rem auto;
+}
+
+.gallery > * {
+  break-inside: avoid;
+  margin-bottom: var(--gap);
+}

@@ -27,14 +27,14 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-grey flex items-center justify-center">
-      <div className="max-w-4xl mx-auto p-4">
-        <div className="bg-grey p-4">
-          <div className="mb-4">
+    <div className="min-h-screen bg-grey ">
+      <div className="p-4">
+        <div className="bg-grey flex md:flex-row flex-col justify-between">
+          <div className="mb-4 md:w-1/2">
             <h1 className="text-2xl font-bold mb-2">Web Camera</h1>
             <CustomWebcam onCapture={handleCapture} />
           </div>
-          <div>
+          <div className="md:w-1/2">
             {/* <h2 className="text-2xl font-bold mb-2">Image Gallery</h2> */}
             <ImageGallery images={images} onDelete={handleDeleteImage} />
           </div>
