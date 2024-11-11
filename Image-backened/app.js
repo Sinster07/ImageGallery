@@ -56,7 +56,6 @@ app.get("/getAllImages", (req, res) => {
   });
 });
 
-
 app.get("/images/:filename", (req, res) => {
   const filename = req.params.filename;
   const imagePath = path.join(__dirname, "uploads", filename);
